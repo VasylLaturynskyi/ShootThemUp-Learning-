@@ -80,3 +80,6 @@ Content/External/Sounds/Weapon_AssaultRifle/Stereo/Weapon_AssaultRifle_Swap03_St
 Content/External/Sounds/Weapon_GrenadeLauncher/Stereo/GenadeLauncher_Reload_Stereo_Cue.uasset
 Content/External/Sounds/Weapon_GrenadeLauncher/Stereo/GrenadeLauncher_Equip_Stereo_Cue.uasset
 Content/External/Sounds/Weapon_GrenadeLauncher/Stereo/Weapon_GrenadeLauncher_Reload01_Stereo.uasset
+Windows/ShootThemUp/Content/Paks/ShootThemUp-Windows.pak
+Windows/ShootThemUp/Content/Paks/ShootThemUp-Windows.ucas
+Windows/ShootThemUp/Content/Paks/ShootThemUp-Windows.utoc
