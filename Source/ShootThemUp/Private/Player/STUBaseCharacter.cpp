@@ -9,6 +9,8 @@
 #include "Weapon/STUBaseWeapon.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/Controller.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundCue.h"
 
 
 
@@ -100,11 +102,14 @@ void ASTUBaseCharacter::OnDeath()
     GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 
 	WeaponComponent->StopFire();
+	WeaponComponent->Zoom(false);
 
     // Включаємо колізію та фізику для меша персонажа після його смерті, 
     // щоб дозволити взаємодію з фізичним світом (наприклад, ragdoll ефект).
     GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
     GetMesh()->SetSimulatePhysics(true);
+
+	UGameplayStatics::PlaySoundAtLocation(GetWorld(), DeathSound, GetActorLocation());
 }
 void ASTUBaseCharacter::SetPlayerColor(const FLinearColor& Color)
 {

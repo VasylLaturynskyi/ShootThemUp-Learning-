@@ -21,6 +21,12 @@ void USTUFindEnemyBTService::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 		if (PreceptionComponent)
 		{
 			Blackboard->SetValueAsObject(EnemyActorKey.SelectedKeyName, PreceptionComponent->GetClosestEnemy());
+			const auto Enemy = PreceptionComponent->GetClosestEnemy();
+			Blackboard->SetValueAsObject(EnemyActorKey.SelectedKeyName, Enemy);
+			if (Controller)
+			{
+				Controller->SetFocus(Enemy);
+			}
 		}
 	}
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);

@@ -87,6 +87,7 @@ void USTUWeaponComponent::EquipWeapon(int32 WeaponIndex)
 
     if (CurrentWeapon)
     { 
+		CurrentWeapon->Zoom(false);
 		CurrentWeapon->StopFire();
         AttachWeaponToSocket(CurrentWeapon, Character->GetMesh(), WeaponArmorySocketName);
     }
@@ -164,6 +165,7 @@ void USTUWeaponComponent::InitAnimation()
         {
             
             // це макрос із Unreal Engine, який використовується для виявлення помилок у коді під час розробки.
+            UE_LOG(LogWeaponComponent, Error, TEXT("ReloadFinishedNotify not found"));
             checkNoEntry();
         }
         
@@ -277,4 +279,12 @@ bool USTUWeaponComponent::NeedAmmo(TSubclassOf<ASTUBaseWeapon> WeaponType)
         }
     }
     return false;
+}
+void USTUWeaponComponent::Zoom(bool Enabled)
+{	
+if(CurrentWeapon)
+    {
+        CurrentWeapon->Zoom(Enabled);
+    }
+
 }
