@@ -72,3 +72,11 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+Content/External/Sounds/Weapon_AssaultRifle/Stereo/Weapon_AssaultRifle_Reload02_Stereo.uasset
+Content/External/Sounds/Weapon_AssaultRifle/Stereo/Weapon_AssaultRifle_Reload03_Stereo.uasset
+Content/External/Sounds/Weapon_AssaultRifle/Stereo/Weapon_AssaultRifle_Swap01_Stereo.uasset
+Content/External/Sounds/Weapon_AssaultRifle/Stereo/Weapon_AssaultRifle_Swap02_Stereo.uasset
+Content/External/Sounds/Weapon_AssaultRifle/Stereo/Weapon_AssaultRifle_Swap03_Stereo.uasset
+Content/External/Sounds/Weapon_GrenadeLauncher/Stereo/GenadeLauncher_Reload_Stereo_Cue.uasset
+Content/External/Sounds/Weapon_GrenadeLauncher/Stereo/GrenadeLauncher_Equip_Stereo_Cue.uasset
+Content/External/Sounds/Weapon_GrenadeLauncher/Stereo/Weapon_GrenadeLauncher_Reload01_Stereo.uasset
