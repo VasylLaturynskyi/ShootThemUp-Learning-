@@ -10,6 +10,7 @@
 
 class USTUHealthComponent;
 class USTUWeaponComponent;
+class USoundCue;
 
     UCLASS()
 class SHOOTTHEMUP_API ASTUBaseCharacter : public ACharacter
@@ -29,14 +30,17 @@ class SHOOTTHEMUP_API ASTUBaseCharacter : public ACharacter
     UPROPERTY(EditDefaultsOnly, Category = "Animation")
     UAnimMontage *DeathAnimMontage;
     
-    UPROPERTY(EditDefaultsOnly, Category = "Damage")
-    FVector2D LandedDamageVelocity = FVector2D(100.0f, 1200.0f);
+    UPROPERTY(EditAnywhere, Category = "Damage")
+    FVector2D LandedDamageVelocity = FVector2D(500.0f, 1200.0f);
 
     UPROPERTY(EditDefaultsOnly, Category = "Damage")
     FVector2D LandedDamage = FVector2D(10.0f, 100.0f);
 
     UPROPERTY(EditDefaultsOnly, Category = "Material")
 	FName MaterialColorName = "Paint Color";
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Sound")
+	USoundCue* DeathSound;
 
     virtual void BeginPlay() override;
     virtual void OnDeath();

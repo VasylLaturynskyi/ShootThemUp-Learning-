@@ -8,6 +8,9 @@
 #include "NiagaraComponent.h"
 #include "Engine/DamageEvents.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundCue.h"
+#include "Components/AudioComponent.h"
 
 
 ASTURifleWeapon::ASTURifleWeapon()
@@ -26,7 +29,7 @@ void ASTURifleWeapon::BeginPlay()
 
 void ASTURifleWeapon::StartFire()
 {
-    InitMuzzleFX();
+    InitFX();
     GetWorldTimerManager().SetTimer(ShotTimerHandle, this, &ASTURifleWeapon::MakeShot, TimeBetweenShots, true);
     MakeShot();
 }
@@ -34,7 +37,7 @@ void ASTURifleWeapon::StartFire()
 void ASTURifleWeapon::StopFire()
 {
     GetWorldTimerManager().ClearTimer(ShotTimerHandle);
-	SetMuzzleFXVisibility(false);
+    SetFXActive(false);
 }
 
 void ASTURifleWeapon::MakeShot()
@@ -88,24 +91,34 @@ void ASTURifleWeapon::MakeDamage(const FHitResult& HitResult)
     const auto DamagedActor = HitResult.GetActor();
     if (!DamagedActor)
         return;
-    DamagedActor->TakeDamage(DamageAmount, FDamageEvent(), GetController(), this);
+    FPointDamageEvent PointDamageEvent;
+	PointDamageEvent.HitInfo = HitResult;
+    DamagedActor->TakeDamage(DamageAmount, PointDamageEvent, GetController(), this);
     
 }
 
-void ASTURifleWeapon::InitMuzzleFX()
+void ASTURifleWeapon::InitFX()
 {
     if(!MuzzleFXComponent)
     {
         MuzzleFXComponent = SpawnMuzzleFX();
 	}
-	SetMuzzleFXVisibility(true);
+    if(!FireAudioComponent)
+    {
+        FireAudioComponent = UGameplayStatics::SpawnSoundAttached(FireSound, WeaponMesh, MuzzleSocketName);
+	}
+    SetFXActive(true);
 }
-void ASTURifleWeapon::SetMuzzleFXVisibility(bool Visible)
+void ASTURifleWeapon::SetFXActive(bool IsActive)
 {
     if(MuzzleFXComponent)
     {
-        MuzzleFXComponent->SetPaused(!Visible);
-		MuzzleFXComponent->SetVisibility(Visible, true);
+        MuzzleFXComponent->SetPaused(!IsActive);
+		MuzzleFXComponent->SetVisibility(IsActive, true);
+	}
+    if(FireAudioComponent)
+    {
+		IsActive ? FireAudioComponent->Play() : FireAudioComponent->Stop();
 	}
 }
 
@@ -121,4 +134,17 @@ AController* ASTURifleWeapon::GetController() const
 {
     const auto Pawn = Cast<APawn>(GetOwner());
     return Pawn ? Pawn->GetController() : nullptr;
+}
+void ASTURifleWeapon::Zoom(bool Enabled)
+{
+	const auto Contrtoller = Cast<APlayerController>(GetController());
+	if (!Contrtoller || !Contrtoller->PlayerCameraManager) return;
+
+    if(Enabled)
+    {
+        DefaultCameraFOV = Contrtoller->PlayerCameraManager->GetFOVAngle();
+	}
+    // Встановлює поле зору (FOV) камери гравця для ефекту "прицілювання".
+    // Створюється інтервал FOV від 50 до 90 градусів: 50 — прицілювання, 90 — стандартний режим.
+  	Contrtoller->PlayerCameraManager->SetFOV(Enabled ? FOVZoomAngle : DefaultCameraFOV);
 }

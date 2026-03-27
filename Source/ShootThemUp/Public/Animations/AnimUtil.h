@@ -12,7 +12,7 @@ public:
         for (auto NotifyEvent : NotifyEvents)
         {
             auto AnimNotify = Cast<T>(NotifyEvent.Notify);
-            if (Animation)
+            if (AnimNotify)
             {
                 return AnimNotify;
             }
