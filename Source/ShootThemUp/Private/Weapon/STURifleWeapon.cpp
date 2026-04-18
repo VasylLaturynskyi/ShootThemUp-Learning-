@@ -42,6 +42,7 @@ void ASTURifleWeapon::StopFire()
 
 void ASTURifleWeapon::MakeShot()
 {
+   
 	UE_LOG(LogTemp, Display, TEXT("Make Shot!")); 
     if (!GetWorld() || IsAmmoEmpty())
     {
@@ -102,6 +103,7 @@ void ASTURifleWeapon::InitFX()
     if(!MuzzleFXComponent)
     {
         MuzzleFXComponent = SpawnMuzzleFX();
+        MuzzleFXComponent->SetTickGroup(TG_PostUpdateWork); // add tick group for correct work with camera shake
 	}
     if(!FireAudioComponent)
     {
@@ -113,6 +115,10 @@ void ASTURifleWeapon::SetFXActive(bool IsActive)
 {
     if(MuzzleFXComponent)
     {
+        if(IsActive)
+        {
+			MuzzleFXComponent->ResetSystem(); // Скидає систему ефектів, щоб вона могла відтворюватися з початку при кожному пострілі.
+		}
         MuzzleFXComponent->SetPaused(!IsActive);
 		MuzzleFXComponent->SetVisibility(IsActive, true);
 	}

@@ -18,6 +18,7 @@ ASTUBaseWeapon::ASTUBaseWeapon()
 {
 	 	
 	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.TickGroup = TG_PostUpdateWork; // Встановлює, що цей актор не буде викликати функцію Tick кожен кадр, оскільки зброя не потребує постійного оновлення. Це оптимізує продуктивність.
 
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>("WeaponMesh");
 	SetRootComponent(WeaponMesh);
@@ -26,6 +27,12 @@ ASTUBaseWeapon::ASTUBaseWeapon()
 void ASTUBaseWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+
+	const auto Character = Cast<ACharacter>(GetOwner());
+ if(Character)
+ {
+	AddTickPrerequisiteActor(Character);
+	}
     
     check(WeaponMesh);
     // checkf - це макрос для перевірки умови під час виконання. 
@@ -73,6 +80,7 @@ bool ASTUBaseWeapon::GetPlayerViewPoint(FVector& VievLocation, FRotator& VievRot
 }
 FVector ASTUBaseWeapon::GetMuzzleWorldLocation() const
 {
+	
     return WeaponMesh->GetSocketLocation(MuzzleSocketName);
 }
 bool ASTUBaseWeapon::GetTraseData(FVector &TraseStart, FVector &TraseEnd) const
@@ -193,3 +201,4 @@ UNiagaraComponent* ASTUBaseWeapon::SpawnMuzzleFX()
     return UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleFX, WeaponMesh, MuzzleSocketName, FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::SnapToTarget, true);
 
 }
+

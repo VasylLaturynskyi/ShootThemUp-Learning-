@@ -61,6 +61,7 @@ class SHOOTTHEMUP_API ASTUBaseWeapon : public AActor
     virtual void BeginPlay() override;
     virtual bool GetTraseData(FVector &TraseStart, FVector &TraseEnd) const;
     virtual void MakeShot();
+	
 
     bool GetPlayerViewPoint(FVector & VievLocation, FRotator & VievRotation) const;
     FVector GetMuzzleWorldLocation() const;
@@ -72,9 +73,12 @@ class SHOOTTHEMUP_API ASTUBaseWeapon : public AActor
 	void DecreaseAmmo();
     bool IsCliosEmpty() const;
 	void LogAmmo();
+	
 
 	UNiagaraComponent* SpawnMuzzleFX();
+ 
 
 private:
     FAmmoData CurrentAmmo;
+    
 };
