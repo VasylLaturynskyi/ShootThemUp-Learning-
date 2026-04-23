@@ -25,10 +25,7 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	UButton* GoToVolume;
-
-	/*UPROPERTY(meta = (BindWidget), Transient)
-	UWidgetAnimation* IsVolumeSelected;*/
-
+		
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Sound")
 	USoundMix* MasterSoundMix;
 	

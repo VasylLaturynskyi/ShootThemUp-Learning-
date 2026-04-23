@@ -49,6 +49,8 @@ class SHOOTTHEMUP_API ASTUBaseCharacter : public ACharacter
   public:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
+	virtual void TurnOff() override;
+    virtual void Reset() override;
 
 
     UFUNCTION(BlueprintCallable, Category = "Movement")

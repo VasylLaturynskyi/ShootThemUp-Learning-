@@ -48,23 +48,7 @@ void USTUPauseWidget::OnVolumeChange(float Value)
 }
 void USTUPauseWidget::OnVolumeClicked()
 {
-	//if (bVolumeVisible)
-	//{
-	//	// Відтворює анімацію у зворотному напрямку для приховування слайдера гучності,
-	//	// встановлює видимість слайдера як "згорнутий" (не відображається на екрані),
-	//	// та оновлює прапорець, що слайдер зараз прихований
-	//	PlayAnimation(IsVolumeSelected, 0.0f, 1, EUMGSequencePlayMode::Reverse);
-	//	SliderMasterVolume->SetVisibility(ESlateVisibility::Collapsed);
-	//	bVolumeVisible = false;
-	//}
-	//else
-	//{
-	//	// Робить слайдер гучності видимим, відтворює анімацію появи слайдера у прямому напрямку
-	//	// та встановлює прапорець, що слайдер зараз відображається
-	//	SliderMasterVolume->SetVisibility(ESlateVisibility::Visible);
-	//	PlayAnimation(IsVolumeSelected, 0.0f, 1, EUMGSequencePlayMode::Forward);
-	//	bVolumeVisible = true;
-	//}
+
 	if (!SliderMasterVolume) return;
 
 	bVolumeVisible = !bVolumeVisible; // Toggle the visibility state of the volume slider

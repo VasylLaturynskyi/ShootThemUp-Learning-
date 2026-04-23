@@ -45,7 +45,7 @@ class SHOOTTHEMUP_API ASTUBaseWeapon : public AActor
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon")
     FName MuzzleSocketName = "MuzzleSocket";
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
     float TraceMaxDistance = 5000.0f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
     FAmmoData DefaultAmmo{15, 10, false};
